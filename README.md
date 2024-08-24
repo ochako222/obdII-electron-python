@@ -40,6 +40,13 @@ This project is an Electron application that integrates Python scripts, allowing
     npx tsc
     ```
 
+4. **Install Python dependencies**
+    ```bash 
+    python3 -m venv env
+    source env/bin/activate.fish
+    pip install -r requirements.txt
+    ```
+
 ## Running the Application
 
 1. **Start the Electron app:**

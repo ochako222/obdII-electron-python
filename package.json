@@ -2,18 +2,17 @@
   "name": "obd-electron-python",
   "version": "1.0.0",
   "main": "main.js",
+  "type": "module",
   "scripts": {
-    "build": "tsc && copyfiles -u 1 src/*.html dist/",
-    "start": "npm run build && electron ./dist/main.js"
+    "build:css": "npx tailwindcss build src/styles.css -o src/output.css",
+    "start": "electron ./src/main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/node": "^22.5.0",
     "copyfiles": "^2.4.1",
-    "electron": "^32.0.1",
-    "typescript": "^5.5.4"
+    "electron": "^32.0.1"
   }
 }
