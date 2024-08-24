@@ -6,14 +6,31 @@ from errors_reader import read_errors
 
 def main():
     if len(sys.argv) > 1:
-        if sys.argv[1] == "check_obd_connection":
-            print(check_obd_connection())
-        elif sys.argv[1] == "read_errors":
-            print(read_errors())
-        elif sys.argv[1] == "clean_errors":
-            print(clean_errors())
+        command = sys.argv[1]
+        port = sys.argv[2] if len(sys.argv) > 2 else None  # Retrieve port argument if available
+
+        if command == "read_errors":
+            if port:
+                result = read_errors(port)
+            else:
+                result = "Port is required for reading errors."
+            print(result)
+
+        elif command == "check_obd_connection":
+            result = check_obd_connection()
+            print(result)
+
+        elif command == "clean_errors":
+            if port:
+                result = clean_errors(port)
+            else:
+                result = "Port is required for cleaning errors."
+            print(result)
+
+        else:
+            print("Invalid command provided.")
     else:
-        print("No valid command provided.")
+        print("No command provided.")
 
 if __name__ == "__main__":
     main()

@@ -15,16 +15,16 @@ function createWindow() {
   win.loadFile('index.html');
 }
 
-ipcMain.on('click-on-read-errors', (event) => {
-  const pythonProcess = spawn('python3', ['obd/main.py', 'read_errors']);
+ipcMain.on('click-on-read-errors', (event, port) => {
+  const pythonProcess = spawn('python3', ['obd/main.py', 'read_errors',port]);
   pythonProcess.stdout.on('data', (data) => {
     event.reply('log-response', data.toString());
   });
 });
 
 
-ipcMain.on('click-on-clean-errors', (event) => {
-  const pythonProcess = spawn('python3', ['obd/main.py', 'clean_errors']);
+ipcMain.on('click-on-clean-errors', (event,port) => {
+  const pythonProcess = spawn('python3', ['obd/main.py', 'clean_errors', port]);
 
   pythonProcess.stdout.on('data', (data) => {
     event.reply('log-response', data.toString());
@@ -34,8 +34,9 @@ ipcMain.on('click-on-clean-errors', (event) => {
 
 ipcMain.on('click-on-reconnect', (event) => {
   const pythonProcess = spawn('python3', ['obd/main.py', 'check_obd_connection']);
-
+  
   pythonProcess.stdout.on('data', (data) => {
+    console.log(`Connecting to port: ${data.toString()}\n`)
     event.reply('update-connection-status', data.toString());
   });
 });

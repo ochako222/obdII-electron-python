@@ -14,11 +14,13 @@ const outputField = document.getElementById('logsOutput')
 
 //  Button events
 readErrorsButton.addEventListener('click',()=>{
-  ipcRenderer.send('click-on-read-errors')
+  const port = connectionStatus.innerText
+  ipcRenderer.send('click-on-read-errors',port)
 })
 
 cleanErrorsButton.addEventListener('click',()=>{
-  ipcRenderer.send('click-on-clean-errors')
+  const port = connectionStatus.innerText
+  ipcRenderer.send('click-on-clean-errors',port)
 })
 
 reconnectButton.addEventListener('click',()=>{
@@ -34,10 +36,10 @@ ipcRenderer.on('log-response', (event, output)=>{
 
 // Connection status event
 ipcRenderer.on('update-connection-status', (event, status) => {
-  const cleaned = status.replace("\n", "");
 
-  if (cleaned == 'Not Connected') connectionStatus.className = 'badge bg-warning me-3'
-  if (cleaned == 'Connected') connectionStatus.className = 'badge bg-success me-3'
+  // Here logic to manage ports according available or not
+  // if (cleaned == 'Not Connected') connectionStatus.className = 'badge bg-warning me-3'
+  // if (cleaned == 'Connected') connectionStatus.className = 'badge bg-success me-3'
 
   connectionStatus.innerText = status
 });
