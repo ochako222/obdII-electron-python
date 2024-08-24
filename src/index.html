@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>OBDII Screener App</title>
+    
+  </head>
   <body>
     <h1>OBDII Screener App</h1>
     <div>
       <button id="check-obd">Check OBD Connection</button>
       <button id="say-hello">Say hello</button>
+      <span class="badge text-bg-warning rounded-pill">Warning</span>
+      <button class="btn btn-primary">Primary Button</button>
+<div class="container">
+  <h1 class="text-center">Hello, World!</h1>
+</div>
       <div id="obd-status">
         <span id="status-indicator" style="width: 20px; height: 20px; display: inline-block; background-color: red; border-radius: 50%;"></span>
         <span id="status-text">Disconnected</span>
@@ -12,5 +24,6 @@
       <pre id="python-output"></pre>
     </div>
     <script src="renderer.js"></script>
-  </body>
+  </body>  
+
 </html>
