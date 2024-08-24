@@ -13,7 +13,7 @@ def main():
     if len(sys.argv) > 1:
         if sys.argv[1] == "say_hello":
             print(say_hello())
-        elif sys.argv[1] == "check_obd":
+        elif sys.argv[1] == "check_obd_connection":
             print(check_obd_connection())
     else:
         print("No valid command provided.")

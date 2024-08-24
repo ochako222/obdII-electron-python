@@ -15,9 +15,17 @@ function createWindow() {
   win.loadFile('index.html');
 }
 
+ipcMain.on('click-on-say-hello', (event) => {
+  const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'say_hello']);
+
+  pythonProcess.stdout.on('data', (data) => {
+    event.reply('say-hello-response', data.toString());
+  });
+});
+
 
 ipcMain.on('check-obd-connection', (event) => {
-  const pythonProcess = spawn('python3', ['obd/script.py', 'check_obd']);
+  const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'check_obd_connection']);
 
   pythonProcess.stdout.on('data', (data) => {
     event.reply('obd-connection-status', data.toString());
