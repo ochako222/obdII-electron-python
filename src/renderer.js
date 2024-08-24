@@ -1,5 +1,8 @@
 const { ipcRenderer } = require('electron');
 
+console.log('This is a log from the renderer process');
+
+
 const reconnectButton = document.getElementById('reconnectBtn')
 const connectionStatus = document.getElementById('connectionStatus')
 
@@ -8,6 +11,8 @@ const cleanErrorsButton = document.getElementById('clearErrorsBtn')
 
 const outputField = document.getElementById('logsOutput')
 
+
+//  Button events
 readErrorsButton.addEventListener('click',()=>{
   ipcRenderer.send('click-on-read-errors')
 })
@@ -16,24 +21,25 @@ cleanErrorsButton.addEventListener('click',()=>{
   ipcRenderer.send('click-on-clean-errors')
 })
 
-ipcRenderer.on('log-response', (response)=>{
-  outputField.innerText = response;
-})
-
-
 reconnectButton.addEventListener('click',()=>{
   ipcRenderer.send('click-on-reconnect')
 })
 
 
+// Output event
+ipcRenderer.on('log-response', (event, output)=>{
+  outputField.innerText = output;
+})
+
+
+// Connection status event
 ipcRenderer.on('update-connection-status', (event, status) => {
-  if (status = 'Not Connected') {
-    connectionStatus.innerText = status
-  } else {
-    // getObdStatus.class = 'badge badge-success';
-    // // getObdStatus.innerText = status;
-    connectionStatus.innerText = status
-  }
+  const cleaned = status.replace("\n", "");
+
+  if (cleaned == 'Not Connected') connectionStatus.className = 'badge bg-warning me-3'
+  if (cleaned == 'Connected') connectionStatus.className = 'badge bg-success me-3'
+
+  connectionStatus.innerText = status
 });
 
 

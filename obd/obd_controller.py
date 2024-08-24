@@ -3,7 +3,8 @@ import obd
 
 def check_obd_connection():
     status = obd.OBD().status()
-    return 'connected'
+    return status
+
 
 def read_errors():
     return 'you have a lot of errors!'

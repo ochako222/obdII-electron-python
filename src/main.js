@@ -17,7 +17,6 @@ function createWindow() {
 
 ipcMain.on('click-on-read-errors', (event) => {
   const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'read_errors']);
-
   pythonProcess.stdout.on('data', (data) => {
     event.reply('log-response', data.toString());
   });
@@ -26,7 +25,7 @@ ipcMain.on('click-on-read-errors', (event) => {
 
 ipcMain.on('click-on-clean-errors', (event) => {
   const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'clean_errors']);
-
+  
   pythonProcess.stdout.on('data', (data) => {
     event.reply('log-response', data.toString());
   });
