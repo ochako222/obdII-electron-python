@@ -15,19 +15,23 @@ function createWindow() {
   win.loadFile('index.html');
 }
 
-ipcMain.on('run first button', (event, arg) => {
-  const pythonProcess = spawn('python3', ['script.py']);
+
+
+// ipcMain.on('check-obd-connection', (event) => {
+//   const pythonProcess = spawn('python3', ['script.py']);
+
+//   pythonProcess.stdout.on('data', (data) => {
+//     event.reply('obd-connection-status', data.toString());
+//   });
+// });
+
+
+ipcMain.on('check-obd-connection', (event) => {
+  const pythonProcess = spawn('python3', ['src/script.py']);
 
   pythonProcess.stdout.on('data', (data) => {
-    event.reply('python-output', data.toString());
-  });
-});
-
-ipcMain.on('run second button', (event, arg) => {
-  const pythonProcess = spawn('python3', ['script.py', 'message']);
-
-  pythonProcess.stdout.on('data', (data) => {
-    event.reply('python-output', data.toString());
+    // const status = data.toString().trim();
+    event.reply('obd-connection-status', data.toString());
   });
 });
 

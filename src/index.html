@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>Run Python Script</h1>
-    <button id="first-button">Run first button</button>
-    <button id="second-button">Run second button</button>
-    <pre id="python-output"></pre>
+    <h1>OBDII Screener App</h1>
+    <div>
+      <button id="check-obd">Check OBD Connection</button>
+      <div id="obd-status">
+        <span id="status-indicator" style="width: 20px; height: 20px; display: inline-block; background-color: red; border-radius: 50%;"></span>
+        <span id="status-text">Disconnected</span>
+      </div>
+      <pre id="python-output"></pre>
+    </div>
     <script src="renderer.js"></script>
   </body>
 </html>

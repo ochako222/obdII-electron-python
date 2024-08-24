@@ -1,18 +1,33 @@
 const { ipcRenderer } = require('electron');
 
-const getPythonFirstButton = document.getElementById('first-button') as HTMLButtonElement;
-const getPythonSecondButton = document.getElementById('second-button') as HTMLButtonElement;
+
+const getCheckObdButton = document.getElementById('check-obd') as HTMLButtonElement;
+const getStatusIndicator = document.getElementById('status-indicator') as HTMLDivElement
+const getStatusText = document.getElementById('status-text') as HTMLSpanElement
+
 
 const pythonOutput = document.getElementById('python-output') as HTMLPreElement;
 
-getPythonFirstButton.addEventListener('click', () => {
-  ipcRenderer.send('run first button');
+getCheckObdButton.addEventListener('click', () => {
+  ipcRenderer.send('check-obd-connection');
 });
 
-getPythonSecondButton.addEventListener('click', () => {
-  ipcRenderer.send('run second button');
-});
 
-ipcRenderer.on('python-output', (event: any, output: string) => {
+ipcRenderer.on('obd-connection-status', (event: any, output: string) => {
   pythonOutput.innerText = output;
 });
+
+// ipcRenderer.on('obd-connection-status', (event: any, status: string) => {
+
+//   pythonOutput.innerText = status;
+
+//   if (status === 'connected') {
+//     getStatusIndicator.style.backgroundColor = 'green';
+//     getStatusText.innerText = 'Connected';
+//   } else {
+//     getStatusIndicator.style.backgroundColor = 'red';
+//     getStatusText.innerText = 'Disconnected';
+//   }
+// });
+
+
