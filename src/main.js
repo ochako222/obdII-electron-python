@@ -16,7 +16,7 @@ function createWindow() {
 }
 
 ipcMain.on('click-on-read-errors', (event) => {
-  const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'read_errors']);
+  const pythonProcess = spawn('python3', ['obd/main.py', 'read_errors']);
   pythonProcess.stdout.on('data', (data) => {
     event.reply('log-response', data.toString());
   });
@@ -24,8 +24,8 @@ ipcMain.on('click-on-read-errors', (event) => {
 
 
 ipcMain.on('click-on-clean-errors', (event) => {
-  const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'clean_errors']);
-  
+  const pythonProcess = spawn('python3', ['obd/main.py', 'clean_errors']);
+
   pythonProcess.stdout.on('data', (data) => {
     event.reply('log-response', data.toString());
   });
@@ -33,7 +33,7 @@ ipcMain.on('click-on-clean-errors', (event) => {
 
 
 ipcMain.on('click-on-reconnect', (event) => {
-  const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'check_obd_connection']);
+  const pythonProcess = spawn('python3', ['obd/main.py', 'check_obd_connection']);
 
   pythonProcess.stdout.on('data', (data) => {
     event.reply('update-connection-status', data.toString());

@@ -1,17 +1,9 @@
 import sys
-import obd
 
-def check_obd_connection():
-    status = obd.OBD().status()
-    return status
+from connection import check_obd_connection
+from errors_cleaner import clean_errors
+from errors_reader import read_errors
 
-
-def read_errors():
-    return 'you have a lot of errors!'
-    
-def clean_errors():
-    return 'all errors cleaned!'
-    
 def main():
     if len(sys.argv) > 1:
         if sys.argv[1] == "check_obd_connection":
