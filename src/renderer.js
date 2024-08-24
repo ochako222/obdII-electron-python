@@ -1,38 +1,38 @@
 const { ipcRenderer } = require('electron');
 
+const reconnectButton = document.getElementById('reconnectBtn')
+const connectionStatus = document.getElementById('connectionStatus')
 
-const getCheckObdButton = document.getElementById('check-obd') 
-const getStatusIndicator = document.getElementById('status-indicator') 
-const getStatusText = document.getElementById('status-text') 
+const readErrorsButton = document.getElementById('readErrorsBtn')
+const cleanErrorsButton = document.getElementById('clearErrorsBtn')
 
+const outputField = document.getElementById('logsOutput')
 
-const pythonOutput = document.getElementById('python-output') 
-
-const seyHello = document.getElementById('say-hello')
-
-getCheckObdButton.addEventListener('click', () => {
-  ipcRenderer.send('check-obd-connection');
-});
-
-seyHello.addEventListener('click',()=>{
-  ipcRenderer.send('click-on-say-hello')
+readErrorsButton.addEventListener('click',()=>{
+  ipcRenderer.send('click-on-read-errors')
 })
 
-ipcRenderer.on('say-hello-response', (event,response)=>{
-  pythonOutput.innerText = response;
+cleanErrorsButton.addEventListener('click',()=>{
+  ipcRenderer.send('click-on-clean-errors')
+})
+
+ipcRenderer.on('log-response', (response)=>{
+  outputField.innerText = response;
 })
 
 
+reconnectButton.addEventListener('click',()=>{
+  ipcRenderer.send('click-on-reconnect')
+})
 
 
-ipcRenderer.on('obd-connection-status', (event, status) => {
- 
+ipcRenderer.on('update-connection-status', (event, status) => {
   if (status = 'Not Connected') {
-    getStatusIndicator.style.backgroundColor = 'orange';
-    getStatusText.innerText = status;
+    connectionStatus.innerText = status
   } else {
-    getStatusIndicator.style.backgroundColor = 'green';
-    getStatusText.innerText = status;
+    // getObdStatus.class = 'badge badge-success';
+    // // getObdStatus.innerText = status;
+    connectionStatus.innerText = status
   }
 });
 

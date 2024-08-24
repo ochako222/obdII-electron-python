@@ -15,21 +15,32 @@ function createWindow() {
   win.loadFile('index.html');
 }
 
-ipcMain.on('click-on-say-hello', (event) => {
-  const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'say_hello']);
+ipcMain.on('click-on-read-errors', (event) => {
+  const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'read_errors']);
 
   pythonProcess.stdout.on('data', (data) => {
-    event.reply('say-hello-response', data.toString());
+    event.reply('log-response', data.toString());
   });
 });
 
 
-ipcMain.on('check-obd-connection', (event) => {
+ipcMain.on('click-on-clean-errors', (event) => {
+  const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'clean_errors']);
+
+  pythonProcess.stdout.on('data', (data) => {
+    event.reply('log-response', data.toString());
+  });
+});
+
+
+ipcMain.on('click-on-reconnect', (event) => {
   const pythonProcess = spawn('python3', ['obd/obd_controller.py', 'check_obd_connection']);
 
   pythonProcess.stdout.on('data', (data) => {
-    event.reply('obd-connection-status', data.toString());
+    event.reply('update-connection-status', data.toString());
   });
 });
+
+
 
 app.whenReady().then(createWindow);
