@@ -12,19 +12,15 @@ getCheckObdButton.addEventListener('click', () => {
   ipcRenderer.send('check-obd-connection');
 });
 
-
-
-
 ipcRenderer.on('obd-connection-status', (event: any, status: string) => {
+  // pythonOutput.innerText = status;
 
-  pythonOutput.innerText = status;
-
-  if (status = 'connected') {
-    getStatusIndicator.style.backgroundColor = 'green';
-    getStatusText.innerText = 'Connected';
+  if (status = 'Not Connected') {
+    getStatusIndicator.style.backgroundColor = 'yellow';
+    getStatusText.innerText = status;
   } else {
-    getStatusIndicator.style.backgroundColor = 'red';
-    getStatusText.innerText = 'Disconnected';
+    getStatusIndicator.style.backgroundColor = 'green';
+    getStatusText.innerText = status;
   }
 });
 

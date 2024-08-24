@@ -17,10 +17,9 @@ function createWindow() {
 
 
 ipcMain.on('check-obd-connection', (event) => {
-  const pythonProcess = spawn('python3', ['script.py']);
+  const pythonProcess = spawn('python3', ['script.py', 'check_obd']);
 
   pythonProcess.stdout.on('data', (data) => {
-    // const status = data.toString().trim();
     event.reply('obd-connection-status', data.toString());
   });
 });
