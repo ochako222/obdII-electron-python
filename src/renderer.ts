@@ -16,7 +16,7 @@ ipcRenderer.on('obd-connection-status', (event: any, status: string) => {
   // pythonOutput.innerText = status;
 
   if (status = 'Not Connected') {
-    getStatusIndicator.style.backgroundColor = 'yellow';
+    getStatusIndicator.style.backgroundColor = 'orange';
     getStatusText.innerText = status;
   } else {
     getStatusIndicator.style.backgroundColor = 'green';
